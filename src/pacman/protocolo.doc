@@ -1,0 +1,163 @@
+			    Protocolo del Arbitro
+
+Header del mensaje (comun a todos los mensajes):
+-----------------------------------------------
+Long Tipo
+Long SubTipo
+Long Version
+Long MsgID
+Long MsgID Original
+Long ID del arbitro Originador del mensaje.
+Long Largo de Data
+
+Especificacion de la estructura:
+-Long Tipo:
+    Identificador del tipo de mensaje. Es único dentro del protocolo de arbitro.
+    Se irá especificando que Tipo es en cada caso.
+-Long SubTipo:
+	Para uso futuro. Para crear variaciones dentro de un tipo de mensaje.
+	Por ahora tiene el valor 0.
+-Long Version:
+	Versión del mensaje. Esta versión responde a la versión del protocolo, 
+	para compatibilidades futuras y pasadas.Por ahora tiene el valor 1.
+-Long MsgID:
+	Identificador unico de un mensaje dentro de un protocolo. Este número 
+	es mantenido por el originador del mensaje.
+-Long MsgID Original:
+	Identificador del mensaje que se está contestando. Se uso en el caso de 
+	respuestas. En este campo se pone el Msg Id del mensaje que se está 
+	contestando.
+-Long ID del arbitro Originador del mensaje:
+	Identificador del arbitro originador del mensaje. 
+-Long Largo de Data:
+	Largo de la parte de data, expresado en bytes.
+
+
+
+Mensaje:
+--------
+
+Mensaje :
+	Header del mensaje
+	Data
+	Cambio de sector:El arbitro de un sector le envía a un arbitro de un 
+	sector contiguo que le va a pasar un personaje.
+
+
+Tipos de mensaje(especificados en la cabecera):
+----------------------------------------------
+>El valor es 100.
+    Data se compone:
+	Long Personaje
+	Char Modalidad
+	Long ID de Arbitro de Origen del personaje
+	Long Puntaje
+	Long Vidas
+	Long Personaje:
+			Pac-Man = 1
+			Fantasma = 2
+	Char Modalidad:
+			Multisector = 1
+			Endosector = 2
+	Long ID de Arbitro de Origen:
+		Identificación del arbitro origen; o sea el que creo al personaje.
+	Long Puntaje y Long Vidas:
+		Medidas del personaje que tiene hasta el momento del cambio de sector.
+	Respuesta a Cambio de sector:
+		El arbitro de un sector le envía al arbitro creador delpersonaje que 
+		viene de recibir.
+
+>El valor es 110.
+    Data se compone:
+	Long ID de Arbitro donde se encuentra personaje del receptor.
+	Long Posisión del personaje del receptor.
+	Char Mapa[25][50]
+	Long ID de Arbitro donde se encuentra personaje del receptor:
+		Es el identificador del arbitro que maneja el sector al que fue migrado 
+		el personaje del receptor.
+	Long Posisión del personaje del receptor:
+		La posisión del personaje migrado. La códificación es 
+		Fila * 100 + Columna.
+		Si el valor es –1 es porque fue comido.
+	Char Mapa[25][50]:
+		Es una matriz con la códificación del mapa. En ella se encuentra el mapa 
+		en sí, al igual que todos los personajes que se encuntran en él.
+	Pedido de Observación de Sector:
+		El arbitro de un sector le envía a otro arbitro el pedido de la situación 
+		de su sector. El receptor del mensaje deberá mantener el servicio hasta el 
+		pedido de fin de servicio. Para mantener el servicio hara uso del mensaje  400.
+	
+>El valor es 200.
+	Fin de Pedido de Observación de Sector:
+		El arbitro de un sector le envía a otro arbitro el fin del servicio de 
+		observación.
+
+>El valor es 210.
+	Envio de movimiento a Sector:
+		El arbitro de un sector le envía a otro arbitro un movimiento de su 
+		personaje que se encuentra en el sector del arbitro destinatario del 
+		mensaje.
+		
+>El valor es 300.
+    Data se compone:
+	Char Movimiento
+	Char Movimiento:
+	    Es el movimiento que realizó su personaje.
+	    Arriba = 1
+	    Abajo = 2
+	    Derecha = 3
+	    Izquierda = 4
+	    
+    Respuesta a Envio de movimiento a Sector:
+	    El arbitro de un sector le contesta a otro 
+	    por el movimiento del personaje del receptor de este mensaje.
+	    
+	    
+>El valor es 310.
+    Data se compone:
+	Char Respuesta de Movimiento
+	Char Mapa[25][50]
+	Char Respuesta de Movimiento:
+	    Es la respuesta al movimiento que se realizó.
+	    OK = 1
+	    ERROR = -1 
+	    COMIDO = 2
+	    Char Mapa[25][50]:Es una matriz con la códificación del mapa. En ella 
+	    se encuentra el mapa en sí, al igual que todos los personajes que se 
+	    encuntran en él.
+
+    Envio de Situación de Sector:
+	    El arbitro de un sector le envía a otro arbitro la situación de su sector.
+
+>El valor es 400.
+    Data se compone:
+	Long Posisión del personaje del receptor.
+	Char Mapa[25][50]
+	Long Posisión del personaje del receptor:
+	    La posisión del personaje remoto. La códificación es Fila * 100 + Columna.
+	    Si el valor es –1 es porque fue comido.
+	    En el caso de que el receptor de este mensaje sea un observador, este campo 
+	    carece de sentido.
+	Char Mapa[25][50]:
+	    Es una matriz con la códificación del mapa. En ella se encuentra el mapa 
+	    en sí, al igual que todos los personajes que se encuntran en él.
+
+
+    Envio de un mensaje:
+	    El arbitro de un sector le envía a otro arbitro un mensaje. Este debera 
+	    ser desplegado en el area de información de la pantalla.
+
+
+>El valor es 500.
+    Data se compone:
+	Char * Mensaje (una secuencia de caracteres contiguos)
+	Char * Mensaje:
+	    Es el mensaje que se deberá desplegar en el area de información dela pantalla.
+	    Ping:El arbitro de un sector le envía a otro arbitro un ping.
+
+
+>El valor es 600.
+	Pong:El arbitro de un sector le envía a otro arbitro un pong.
+	Es la respuesta a un ping.
+>El valor es 610.
+

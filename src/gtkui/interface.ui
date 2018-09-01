@@ -1,0 +1,81 @@
+<!DOCTYPE UI><UI>
+<class>Form1</class>
+<widget>
+    <class>QWidget</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>Form1</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>600</width>
+            <height>480</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Form1</string>
+    </property>
+    <widget>
+        <class>QPushButton</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>PushButton1</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>120</x>
+                <y>30</y>
+                <width>121</width>
+                <height>81</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>PushButton1</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QLabel</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>PixmapLabel1</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>300</x>
+                <y>20</y>
+                <width>121</width>
+                <height>101</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>pixmap</name>
+            <pixmap>image0</pixmap>
+        </property>
+        <property stdset="1">
+            <name>scaledContents</name>
+            <bool>true</bool>
+        </property>
+    </widget>
+</widget>
+<images>
+    <image>
+        <name>image0</name>
+        <data format="XPM.GZ" length="1634">789ca5d4c10ac2300c00d07bbf222cb7219d9b0a82f8098a47413c8c4dd1830a3a0f22febb730cd6364937b79ebaf62d244d6914c276b38230528f222dce1964a7f40e61febc5c5ebbfdf2ad82c90ca66348200e462ad090c1fa763dfce658cef19827f338afb6da878f6139da1962e36486683891e13066246c2a879909cbcc5a248a30fc87b98a32b43e64864c30b7d26a8b06e318a39ce39594d9acbe4cb3cc757a18d3a272ee9ba464e689d6ad5272249d2a35a1b70b482e92c46ae96d7de3986b894c2935737e1618cd9a635c6d2d8ce99ca6cc6ca4b1e4302d0cbb044959072222ff13dd837d16ea0b59780706</data>
+    </image>
+</images>
+<connections>
+    <connection>
+        <sender>PushButton1</sender>
+        <signal>released()</signal>
+        <receiver>PushButton1</receiver>
+        <slot>animateClick()</slot>
+    </connection>
+</connections>
+</UI>

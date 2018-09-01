@@ -1,0 +1,1 @@
+gcc -Wall -g filename.c -o finename `gtk-config --cgflags` `gtk-config --libs`

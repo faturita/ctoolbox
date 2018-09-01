@@ -1,0 +1,16 @@
+%{
+#include <stdio.h>
+#include <string.h>
+#define PALABRA
+#define NUMERO
+%}
+letra	[A-Za-z]
+digito	[0-9]
+numero	({digito})*
+palabra ({letra})*
+%%
+
+{palabra}{return (PALABRA);}
+{numero} {return (NUMERO);}
+
+%%

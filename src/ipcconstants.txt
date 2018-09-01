@@ -1,0 +1,19 @@
+Constantes para la utilizacion de ipc en las llamadas de
+UNIX POSIX
+
+    mq_open
+    sem_open
+    shm_open
+    
+O_RDONLY
+O_WRONLY
+O_RDWR
+
+O_CREAT		Crea si no existe
+O_EXCL		Creacion exclusiva(sobreescribe)
+
+O_NONBLOCK	Modo no bloqueado (asincronico)
+O_TRUNC		Cortar si ya existe.
+
+
+

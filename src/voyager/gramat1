@@ -1,0 +1,20 @@
+%token PALABRA NUMERO
+
+%start oracion
+
+%%
+
+oracion	
+    : PALABRA oracion ;
+
+%%
+#include <stdio.h>
+
+void yyerror(s)
+{
+	fflush(stdout);
+	printf("ERROR:%s\n",s);
+}
+
+
+
